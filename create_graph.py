@@ -16,6 +16,9 @@ def process_pkl_files(triples_file,labels_file):
 
 #Creates igraph object and a list of nodes
 def create_igraph_graph(edgelist_df,labels):
+    
+    #To ensure using column names is case insensitive
+    edgelist_df.columns = edgelist_df.columns.str.lower()
 
     edgelist_df = edgelist_df[['Subject', 'Object', 'Predicate']]
 
