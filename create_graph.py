@@ -13,23 +13,23 @@ def process_pkl_files(triples_file,labels_file):
 
     #labels = pd.read_csv(labels_file, sep = '	')
     #labels.columns.str.lower()
-    
-    
+       
     # In order to show all the labels available in the labels_file tab deliminated txt file, read the file with pandas fixed-width lines reader
-    # (this will destroy the frame of the file though!!!)
-    labels_fwf = pd.read_fwf(labels_file)
-    print("The total number of labels is", len(labels_fwf))
+    # (this will destroy the frame of the file though!)
+    labels_for_uri = pd.read_fwf(labels_file)
+    print("The total number of labels is", len(labels_for_uri))
     
-    '''extract the URIs from the fwf_labels file.
+    '''extract the labels from the fwf_labels file.
     uri_labels = []
-    for i in labels_fwf.iloc[:,0]:
+    for i in labels_for_uri.iloc[:,0]:
         i = i.split('<')
         i= i[1].split('>')
         uri= "<" + str(i[0]) + ">"
         uri_labels.append(uri)
 
-    return triples_df, uri_labels
-
+    return triples_df,labels, uri_labels
+    
+    
 #Creates igraph object and a list of nodes
 def create_igraph_graph(edgelist_df,uri_labels):
 
