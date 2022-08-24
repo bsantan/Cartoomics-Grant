@@ -11,8 +11,24 @@ def process_pkl_files(triples_file,labels_file):
     triples_df = pd.read_csv(triples_file,sep = '	')
     triples_df.columns.str.lower()
 
-    labels = pd.read_csv(labels_file, sep = '	')
-    labels.columns.str.lower()
+    #labels = pd.read_csv(labels_file, sep = '	')
+    #labels.columns.str.lower()
+    
+    
+    # In order to show all the labels available in the labels_file tab deliminated txt file, read the file with pandas fixed-width lines reader
+    # (this will destroy the frame of the file though!!!)
+    all_labels = pd.read_fwf(labels_file)
+    print("The total number of labels is", len(all_labels))
+    
+    '''extract the labels from the fwf_labels file.
+    This will extract the linsk without the "<>" on border on each string  ''' 
+    labels = []
+    row_num = 0
+    for i in labels_fwf.iloc[:,0]:
+        i = i.split('<')
+        i= i[1].split('>')
+        labels_from_fwf.append(i[0])
+        row_num +=1
 
     return triples_df,labels
 
