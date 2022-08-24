@@ -17,11 +17,10 @@ def process_pkl_files(triples_file,labels_file):
     
     # In order to show all the labels available in the labels_file tab deliminated txt file, read the file with pandas fixed-width lines reader
     # (this will destroy the frame of the file though!!!)
-    labels_fwf = pd.read_fwf(pkl_microbiome_labels_file)
-    print("The total number of labels is", len(all_labels))
+    labels_fwf = pd.read_fwf(labels_file)
+    print("The total number of labels is", len(labels_fwf))
     
-    '''extract the labels from the fwf_labels file.
-    This will extract the linsk without the "<>" on border on each string  ''' 
+    '''extract the URIs from the fwf_labels file.
     uri_labels = []
     for i in labels_fwf.iloc[:,0]:
         i = i.split('<')
