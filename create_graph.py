@@ -17,29 +17,28 @@ def process_pkl_files(triples_file,labels_file):
     
     # In order to show all the labels available in the labels_file tab deliminated txt file, read the file with pandas fixed-width lines reader
     # (this will destroy the frame of the file though!!!)
-    all_labels = pd.read_fwf(labels_file)
+    labels_fwf = pd.read_fwf(pkl_microbiome_labels_file)
     print("The total number of labels is", len(all_labels))
     
     '''extract the labels from the fwf_labels file.
     This will extract the linsk without the "<>" on border on each string  ''' 
-    labels = []
-    row_num = 0
+    uri_labels = []
     for i in labels_fwf.iloc[:,0]:
         i = i.split('<')
         i= i[1].split('>')
-        labels_from_fwf.append(i[0])
-        row_num +=1
+        uri= "<" + str(i[0]) + ">"
+        uri_labels.append(uri)
 
-    return triples_df,labels
+    return triples_df, uri_labels
 
 #Creates igraph object and a list of nodes
-def create_igraph_graph(edgelist_df,labels):
+def create_igraph_graph(edgelist_df,uri_labels):
 
     edgelist_df = edgelist_df[['subject', 'object', 'predicate']]
 
 #    uri_labels = labels[['Identifier']]
 # Different uri column in PheKnowLator_v3.0.2_full_instance_relationsOnly_OWLNETS_NodeLabels.txt. 
-    uri_labels = labels[['entity_uri']]
+    #uri_labels = labels[['entity_uri']]
 
     g = Graph.DataFrame(edgelist_df,directed=True,use_vids=False)
 
