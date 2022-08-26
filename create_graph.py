@@ -8,26 +8,13 @@ from igraph import *
 ###Read in all files, outputs triples and labels as a df
 def process_pkl_files(triples_file,labels_file):
 
-    triples_df = pd.read_csv(triples_file,sep = '	')
+    triples_df = pd.read_csv(triples_file,sep = '	', quoting=csv.QUOTE_NONE)
     triples_df.columns.str.lower()
 
-    #labels = pd.read_csv(labels_file, sep = '	')
+    #labels = pd.read_csv(labels_file, sep = '	', quoting=csv.QUOTE_NONE)
     #labels.columns.str.lower()
-       
-    # In order to show all the labels available in the labels_file tab deliminated txt file, read the file with pandas fixed-width lines reader
-    # (this will destroy the frame of the file though!)
-    labels_for_uri = pd.read_fwf(labels_file)
-    print("The total number of labels is", len(labels_for_uri))
-    
-    '''extract the labels from the fwf_labels file.
-    uri_labels = []
-    for i in labels_for_uri.iloc[:,0]:
-        i = i.split('<')
-        i= i[1].split('>')
-        uri= "<" + str(i[0]) + ">"
-        uri_labels.append(uri)
 
-    return triples_df,labels, uri_labels
+    return triples_df,labels
     
     
 #Creates igraph object and a list of nodes
