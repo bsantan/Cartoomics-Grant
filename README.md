@@ -12,7 +12,7 @@ The path search algorithms available are:
 - Cosine similarity Prioritization: prioritize all shortest paths between each source and target node by maximizing total cosine similarity of the start and all intermediate nodes to the target node in each path
 - Path Degree Product Prioritization: prioritize all shortest paths between each source and target node by maximizing path degree product of all nodes in each path
 
-The program will output a subgraph generated using both the Cosine Similarity and Path-Degree Product algorithms.
+The program will output a subgraph generated using the Cosine Similarity, Path-Degree Product, and Edge Exclusion algorithms.
 
 ### Dependencies
 The following dependencies are listed in the environment.yml file, and installed in the installation step. This software has only been tested on Unix based OS systems, not Windows.
